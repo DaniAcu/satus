@@ -1,6 +1,6 @@
 'use client'
-
 import cn from 'clsx'
+import { env } from 'env'
 import Script from 'next/script'
 import s from './form.module.scss'
 
@@ -19,7 +19,7 @@ export function EmbedHubspotForm({
         onLoad={() => {
           console.log('Form script loaded')
           window.hbspt.forms.create({
-            portalId: process.env.NEXT_PUBLIC_HUSBPOT_PORTAL_ID,
+            portalId: env.NEXT_PUBLIC_HUSBPOT_PORTAL_ID,
             formId,
             target: '#' + target,
             submitButtonClass: s.submit,

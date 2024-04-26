@@ -1,4 +1,5 @@
 'use client'
+import { env } from 'env'
 
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
@@ -10,7 +11,7 @@ export function ScrollTriggerConfig() {
     gsap.registerPlugin(ScrollTrigger)
     ScrollTrigger.clearScrollMemory('manual')
     ScrollTrigger.defaults({
-      markers: process.env.NODE_ENV === 'development',
+      markers: env.NODE_ENV === 'development',
     })
   }, [])
 

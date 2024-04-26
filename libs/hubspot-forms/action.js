@@ -1,7 +1,8 @@
 'use server'
+import { env } from 'env'
 
 export async function HubspotNewsletterAction(prevState, formData) {
-  const portalId = process.env.NEXT_PUBLIC_HUSBPOT_PORTAL_ID
+  const portalId = env.NEXT_PUBLIC_HUSBPOT_PORTAL_ID
   const formId = formData.get('formId')
 
   const body = {

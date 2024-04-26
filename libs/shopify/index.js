@@ -1,3 +1,5 @@
+import { env } from 'env'
+
 import {
   HIDDEN_PRODUCT_TAG,
   SHOPIFY_GRAPHQL_API_ENDPOINT,
@@ -26,8 +28,8 @@ import {
   getProductsQuery,
 } from './queries/product'
 
-const endpoint = process.env.SHOPIFY_STORE_DOMAIN + SHOPIFY_GRAPHQL_API_ENDPOINT
-const key = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN
+const endpoint = env.SHOPIFY_STORE_DOMAIN + SHOPIFY_GRAPHQL_API_ENDPOINT
+const key = env.SHOPIFY_STOREFRONT_ACCESS_TOKEN
 
 export async function shopifyFetch({
   cache = 'force-cache',
@@ -379,7 +381,7 @@ export async function revalidate(req) {
   const isCollectionUpdate = collectionWebhooks.includes(topic)
   const isProductUpdate = productWebhooks.includes(topic)
 
-  if (!secret || secret !== process.env.SHOPIFY_REVALIDATION_SECRET) {
+  if (!secret || secret !== env.SHOPIFY_REVALIDATION_SECRET) {
     console.error('Invalid revalidation secret.')
     return NextResponse.json({ status: 200 })
   }

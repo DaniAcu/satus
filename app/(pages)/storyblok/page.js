@@ -1,14 +1,15 @@
+import { env } from 'env'
 import { StoryblokApi } from 'libs/storyblok'
 import { StoryblokContextProvider } from 'libs/storyblok/context'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { Wrapper } from '../(components)/wrapper'
+
 import { Tutorial } from './(component)/tutorial'
 import s from './storyblok.module.scss'
 
 export default async function Storyblok() {
-  const isDraftMode =
-    draftMode().isEnabled || process.env.NODE_ENV === 'development'
+  const isDraftMode = draftMode().isEnabled || env.NODE_ENV === 'development'
 
   const { data } = await new StoryblokApi({
     draft: isDraftMode,
@@ -37,8 +38,7 @@ export default async function Storyblok() {
 
 // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
 export async function generateMetadata({}) {
-  const isDraftMode =
-    draftMode().isEnabled || process.env.NODE_ENV === 'development'
+  const isDraftMode = draftMode().isEnabled || env.NODE_ENV === 'development'
 
   const { data } = await new StoryblokApi({
     draft: isDraftMode,
@@ -57,7 +57,7 @@ export async function generateMetadata({}) {
       title: content?.title,
       description: content?.description,
       images: content?.image?.filename,
-      url: process.env.NEXT_PUBLIC_BASE_URL,
+      url: env.NEXT_PUBLIC_BASE_URL,
     },
     twitter: {
       title: content?.title,

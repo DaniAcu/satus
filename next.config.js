@@ -3,6 +3,8 @@ import bundleAnalyzer from '@next/bundle-analyzer'
 import { castToSass } from './libs/sass-utils/index.js'
 import sassVars from './styles/config.js'
 
+import { env } from './env.js'
+
 import {
   PHASE_DEVELOPMENT_SERVER,
   PHASE_PRODUCTION_BUILD,
@@ -17,7 +19,7 @@ const nextConfig = {
     webpackBuildWorker: true,
   },
   compiler: {
-    removeConsole: process.env.NODE_ENV !== 'development',
+    removeConsole: env.NODE_ENV !== 'development',
   },
   images: {
     dangerouslyAllowSVG: true,
@@ -180,7 +182,7 @@ const nextConfig = {
 const NextApp = async (phase) => {
   /** @type {import('next').NextConfig} */
   const withBundleAnalyzer = bundleAnalyzer({
-    enabled: process.env.ANALYZE === 'true',
+    enabled: env.ANALYZE === 'true',
   })
 
   const plugins = [withBundleAnalyzer]

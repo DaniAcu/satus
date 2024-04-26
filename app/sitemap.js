@@ -1,3 +1,4 @@
+import { env } from 'env'
 import fs from 'fs'
 import path from 'path'
 
@@ -11,7 +12,7 @@ export default function sitemap() {
 
   const sitemapArray = [
     {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      url: `${env.NEXT_PUBLIC_BASE_URL}`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 1,
@@ -22,7 +23,7 @@ export default function sitemap() {
       })
       .map((folder) => {
         return {
-          url: `${process.env.NEXT_PUBLIC_BASE_URL}/${folder}`,
+          url: `${env.NEXT_PUBLIC_BASE_URL}/${folder}`,
           lastModified: new Date(),
           changeFrequency: 'weekly',
           priority: 0.8,

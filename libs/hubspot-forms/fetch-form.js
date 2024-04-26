@@ -1,8 +1,10 @@
+import { env } from 'env'
+
 const hubspotFormApi = async (id) => {
   const resp = await fetch(`https://api.hubapi.com/marketing/v3/forms/${id}`, {
     headers: {
       accept: 'application/json',
-      authorization: `Bearer ${process.env.HUBSPOT_ACCESS_TOKEN}`,
+      authorization: `Bearer ${env.HUBSPOT_ACCESS_TOKEN}`,
     },
   })
   if (!resp.ok) {
@@ -31,7 +33,7 @@ const apiParser = (id, data) => {
     htmlText.replace('<p>', '').replace('</p>', '')
 
   return {
-    portalId: process.env.NEXT_PUBLIC_HUSBPOT_PORTAL_ID,
+    portalId: env.NEXT_PUBLIC_HUSBPOT_PORTAL_ID,
     id: id,
     inputs: data.fieldGroups.map((item) => {
       const flatData = item.fields[0]

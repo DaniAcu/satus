@@ -2,6 +2,7 @@ import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 import { Debug } from 'components/debug'
 import { GSAP } from 'components/gsap'
 import { RealViewport } from 'components/real-viewport'
+import { env } from 'env'
 import { StyleVariables } from 'libs/style-variables'
 import { colors, themes } from 'styles/config'
 import AppData from '../../package.json'
@@ -13,15 +14,15 @@ const APP_NAME = AppData.name
 const APP_DEFAULT_TITLE = 'Satūs'
 const APP_TITLE_TEMPLATE = '%s - Satūs'
 const APP_DESCRIPTION = AppData.description
-const APP_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+const APP_BASE_URL = env.NEXT_PUBLIC_BASE_URL
 
-const GTM_ID = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || false
-const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS || false
+const GTM_ID = !!env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || false
+const GA_ID = !!env.NEXT_PUBLIC_GOOGLE_ANALYTICS || false
 
 export const metadata = {
   metadataBase:
-    process.env.NODE_ENV === 'dev'
-      ? new URL(`http://localhost:${process.env.PORT || 3000}`)
+    env.NODE_ENV === 'dev'
+      ? new URL(`http://localhost:${env.PORT || 3000}`)
       : new URL(APP_BASE_URL),
   applicationName: APP_NAME,
   title: {
